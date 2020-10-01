@@ -9,11 +9,11 @@
 #include <turtlesim/Kill.h>
 
 # define PI           3.14159265358979323846 
-
 int main(int argc, char **argv)
 {
   // ROS node setup
   using namespace ros;
+  
   std::string turtle_name = "Savelev";
   init(argc, argv, "Savelev_turtle_ctrl");
   NodeHandle n;
@@ -38,12 +38,12 @@ int main(int argc, char **argv)
 
   //Go to loop for controlling turtle
   Publisher pub = n.advertise<geometry_msgs::Twist>(turtle_name + "/cmd_vel", 1000);
-  Rate loop_rate(2.5);
+  Rate loop_rate(3);
   geometry_msgs::Twist twist;
   twist.angular.z = PI / 1.2;
   while (true) 
   {
-    for(int i = 0; i <= 4; i++)
+    for(int i = 0; i <= 2; i++)
     {
       twist.linear.x = 5.0;
       twist.linear.y = 0.0;
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     twist.angular.z = PI;
     pub.publish(twist);
     twist.angular.z = PI / 1.2;
-    for(int i = 0; i <= 4; i++)
+    for(int i = 0; i <= 2; i++)
     {
       twist.linear.x = -5.0;
       twist.linear.y = 0.0;
